@@ -22,7 +22,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach(html_escape($users) as $user): ?>
+                <?php foreach(html_escape($data) as $user): ?>
                 <tr class="hover:bg-gray-100 border-b border-gray-200">
                     <td class="py-3 px-6 text-gray-700"><?=($user['id']); ?></td>
                     <td class="py-3 px-6 text-gray-700"><?=($user['firstname']); ?></td>
