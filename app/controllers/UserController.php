@@ -15,6 +15,7 @@ class UserController extends Controller {
     public function index()
     {
         $data = $this->UsersModel->all();
+        var_dump(['users' => $data]);exit;
         $this->call->view('users/index', ['users' => $data]);
     }
 
