@@ -61,8 +61,8 @@ sql12798877
 */
 
 $database['main'] = array(
-    'driver'	=> 'sql12.freesqldatabase.com',
-    'hostname'	=> 'localhost',
+    'driver'	=> 'mysql',
+    'hostname'	=> 'sql12.freesqldatabase.com',
     'port'		=> '3306',
     'username'	=> 'sql12798877',
     'password'	=> 'akj9dEryir',
