@@ -55,11 +55,14 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 |   You can create new instance of the database by adding new element of
 |   $database variable.
 |   Example: $database['another_example'] = array('key' => 'value')
+sql12.freesqldatabase.com
+sql12798877
+sql12798877
 */
 
 $database['main'] = array(
-    'driver'	=> 'mysql',
-    'hostname'	=> 'sql12.freesqldatabase.com',
+    'driver'	=> 'sql12.freesqldatabase.com',
+    'hostname'	=> 'localhost',
     'port'		=> '3306',
     'username'	=> 'sql12798877',
     'password'	=> 'akj9dEryir',
