@@ -94,11 +94,11 @@
     <h2>Register</h2>
     <form method="POST" action="<?= site_url('auth/register'); ?>">
       <div class="inputBox">
-        <input type="text" name="Firstname" placeholder="Firstname" required>
+        <input type="text" name="firstname" placeholder="Firstname" required>
       </div>
 
       <div class="inputBox">
-        <input type="text" name="Lastname" placeholder="Lastname" required>
+        <input type="text" name="fastname" placeholder="Lastname" required>
       </div>
 
       <div class="inputBox">
