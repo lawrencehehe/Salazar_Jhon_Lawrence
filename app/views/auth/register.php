@@ -98,7 +98,7 @@
       </div>
 
       <div class="inputBox">
-        <input type="text" name="fastname" placeholder="Lastname" required>
+        <input type="text" name="lastname" placeholder="Lastname" required>
       </div>
 
       <div class="inputBox">
