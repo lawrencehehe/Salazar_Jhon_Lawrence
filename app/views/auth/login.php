@@ -21,90 +21,132 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background: #f5f5f5;
+      background: linear-gradient(135deg, #f0f7f5, #ffffff);
     }
 
     .login {
       background: #fff;
-      padding: 30px;
-      border-radius: 10px;
-      width: 350px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      padding: 35px 30px;
+      border-radius: 15px;
+      width: 95%;
+      max-width: 380px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .login:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
     }
 
     .login h2 {
       text-align: center;
-      margin-bottom: 20px;
-      color: #333;
+      margin-bottom: 25px;
+      color: #2C786C;
+      font-size: 1.8em;
+      letter-spacing: 0.5px;
     }
 
     .login .inputBox {
       position: relative;
-      margin-bottom: 15px;
+      margin-bottom: 18px;
     }
 
     .login .inputBox input {
       width: 100%;
-      padding: 12px 40px 12px 12px;
+      padding: 12px 42px 12px 12px;
       font-size: 1em;
-      border-radius: 5px;
-      border: 1px solid #ccc;
+      border-radius: 8px;
+      border: 1px solid #cdd9d6;
+      background: #f8fbfa;
+      transition: all 0.3s ease;
+    }
+
+    .login .inputBox input:focus {
+      border-color: #2C786C;
+      outline: none;
+      box-shadow: 0 0 6px rgba(44, 120, 108, 0.3);
+      background: #fff;
     }
 
     .toggle-password {
       position: absolute;
-      right: 10px;
+      right: 12px;
       top: 50%;
       transform: translateY(-50%);
       cursor: pointer;
-      color: #666;
+      color: #8b9d9a;
+      font-size: 1.1em;
+      transition: color 0.3s ease;
+    }
+
+    .toggle-password:hover {
+      color: #2C786C;
     }
 
     .login button {
       width: 100%;
       padding: 12px;
       border: none;
-      background: #8f2c24;
+      background: #2C786C;
       color: #fff;
       font-size: 1em;
-      border-radius: 5px;
+      font-weight: 600;
+      border-radius: 8px;
       cursor: pointer;
-      transition: 0.3s;
+      transition: background 0.3s ease, transform 0.2s ease;
     }
 
     .login button:hover {
-      background: #d64c42;
+      background: #3E9C8C;
+      transform: translateY(-2px);
+    }
+
+    .error-box {
+      background: rgba(255, 0, 0, 0.08);
+      color: #c0392b;
+      padding: 10px;
+      border: 1px solid #c0392b;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      text-align: center;
+      font-size: 0.9em;
     }
 
     .group {
-      margin-top: 15px;
+      margin-top: 18px;
       text-align: center;
     }
 
+    .group p {
+      font-size: 0.9em;
+      color: #555;
+    }
+
     .group a {
-      color: #8f2c24;
+      color: #2C786C;
       text-decoration: none;
+      font-weight: 500;
     }
 
     .group a:hover {
       text-decoration: underline;
     }
 
-    .error-box {
-      background: rgba(255,0,0,0.1);
-      color: #d64c42;
-      padding: 10px;
-      border: 1px solid #d64c42;
-      border-radius: 5px;
-      margin-bottom: 15px;
-      text-align: center;
-      font-size: 0.9em;
+    @media (max-width: 400px) {
+      .login {
+        padding: 25px 20px;
+      }
+
+      .login h2 {
+        font-size: 1.5em;
+      }
     }
   </style>
 </head>
 <body>
   <div class="login">
-    <h2>Login</h2>
+    <h2>Welcome Back</h2>
 
     <?php if (!empty($error)): ?>
       <div class="error-box">
@@ -130,9 +172,7 @@
     </form>
 
     <div class="group">
-      <p style="font-size: 0.9em;">
-        Don't have an account? <a href="<?= site_url('auth/register'); ?>">Register here</a>
-      </p>
+      <p>Don’t have an account? <a href="<?= site_url('auth/register'); ?>">Register here</a></p>
     </div>
   </div>
 
