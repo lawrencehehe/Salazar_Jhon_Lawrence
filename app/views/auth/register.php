@@ -1,11 +1,10 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
   <style>
     * {
       margin: 0;
@@ -14,104 +13,85 @@
       font-family: "Poppins", sans-serif;
     }
 
-    body {
+    body, section {
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(to bottom right, #fbcfe8, #fce7f3, #f9a8d4);
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      background: linear-gradient(135deg, #f0f7f5, #ffffff);
     }
 
-    .register {
-      background: #fff;
-      padding: 35px 30px;
-      border-radius: 15px;
-      width: 95%;
-      max-width: 380px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    .login {
+      background: white;
+      padding: 50px 40px;
+      width: 500px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      border: 1px solid #f9a8d4;
     }
 
-    .register:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
-    }
-
-    .register h2 {
+    .login h2 {
       text-align: center;
+      font-size: 2em;
+      font-weight: 600;
+      color: #db2777;
       margin-bottom: 25px;
-      color: #2C786C;
-      font-size: 1.8em;
-      letter-spacing: 0.5px;
     }
 
-    .register .inputBox {
-      position: relative;
-      margin-bottom: 18px;
-    }
-
-    .register .inputBox input {
+    .login input {
       width: 100%;
-      padding: 12px 42px 12px 12px;
-      font-size: 1em;
+      padding: 14px 20px;
+      margin-bottom: 18px;
+      font-size: 1.05em;
       border-radius: 8px;
-      border: 1px solid #cdd9d6;
-      background: #f8fbfa;
-      transition: all 0.3s ease;
-    }
-
-    .register .inputBox input:focus {
-      border-color: #2C786C;
+      border: 1px solid #fbcfe8;
+      background: #fdf2f8;
+      color: #a21caf;
       outline: none;
-      box-shadow: 0 0 6px rgba(44, 120, 108, 0.3);
-      background: #fff;
     }
 
-    .toggle-password {
+    .login input::placeholder {
+      color: #d63384;
+    }
+
+    .password-box {
+      position: relative;
+    }
+
+    .password-box i {
       position: absolute;
-      right: 12px;
+      right: 15px;
       top: 50%;
       transform: translateY(-50%);
       cursor: pointer;
-      color: #8b9d9a;
-      font-size: 1.1em;
-      transition: color 0.3s ease;
+      color: #d63384;
     }
 
-    .toggle-password:hover {
-      color: #2C786C;
-    }
-
-    .register button {
+    #btn {
       width: 100%;
-      padding: 12px;
+      padding: 15px;
+      font-size: 1.2em;
+      font-weight: 500;
       border: none;
-      background: #2C786C;
-      color: #fff;
-      font-size: 1em;
-      font-weight: 600;
-      border-radius: 8px;
+      border-radius: 10px;
+      background: #ec4899;
+      color: white;
       cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s ease;
+      transition: background 0.3s ease;
     }
 
-    .register button:hover {
-      background: #3E9C8C;
-      transform: translateY(-2px);
+    #btn:hover {
+      background: #db2777;
     }
 
     .group {
-      margin-top: 18px;
       text-align: center;
-    }
-
-    .group p {
-      font-size: 0.9em;
-      color: #555;
+      margin-top: 10px;
     }
 
     .group a {
-      color: #2C786C;
+      color: #d63384;
       text-decoration: none;
       font-weight: 500;
     }
@@ -119,51 +99,38 @@
     .group a:hover {
       text-decoration: underline;
     }
-
-    @media (max-width: 400px) {
-      .register {
-        padding: 25px 20px;
-      }
-
-      .register h2 {
-        font-size: 1.5em;
-      }
-    }
   </style>
 </head>
 <body>
-  <div class="register">
-    <h2>Create Account</h2>
-    <form method="POST" action="<?= site_url('auth/register'); ?>">
-      <div class="inputBox">
-        <input type="text" name="firstname" placeholder="Firstname" required>
-      </div>
+  <section>
+    <div class="login">
+      <h2>Register</h2>
+      <form method="POST" action="<?= site_url('reg/register'); ?>" class="inputBox">
 
-      <div class="inputBox">
-        <input type="text" name="lastname" placeholder="Lastname" required>
-      </div>
-
-      <div class="inputBox">
+        <input type="text" name="username" placeholder="Username" required>
         <input type="email" name="email" placeholder="Email" required>
+
+        <div class="password-box">
+          <input type="password" id="password" name="password" placeholder="Password" required>
+          <i class="fa-solid fa-eye" id="togglePassword"></i>
+        </div>
+
+        <div class="password-box">
+          <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm Password" required>
+          <i class="fa-solid fa-eye" id="toggleConfirmPassword"></i>
+        </div>
+
+        <!-- Hidden role input to force user role -->
+        <input type="hidden" name="role" value="user">
+
+        <button type="submit" id="btn">Register</button>
+      </form>
+
+      <div class="group">
+        <p>Already have an account? <a href="<?= site_url('reg/login'); ?>">Login here</a></p>
       </div>
-
-      <div class="inputBox">
-        <input type="password" id="password" name="password" placeholder="Password" required>
-        <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
-      </div>
-
-      <div class="inputBox">
-        <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm Password" required>
-        <i class="fa-solid fa-eye toggle-password" id="toggleConfirmPassword"></i>
-      </div>
-
-      <button type="submit">Register</button>
-    </form>
-
-    <div class="group">
-      <p>Already have an account? <a href="<?= site_url('/auth/login'); ?>">Login here</a></p>
     </div>
-  </div>
+  </section>
 
   <script>
     function toggleVisibility(toggleId, inputId) {

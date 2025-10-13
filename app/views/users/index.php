@@ -1,301 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Students Info</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Directory</title>
+  <link rel="stylesheet" href="<?=base_url();?>/public/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+
   <style>
-    * { margin:0; padding:0; box-sizing:border-box; font-family:"Poppins", sans-serif; }
-
-body {
-  min-height:100vh;
-  color:#1b1b2f;
-  background: linear-gradient(135deg, #dfe7fd, #e3e8f0);
-}
-
-section {
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  width:100%;
-  min-height:100vh;
-  padding:20px;
-}
-
-.glass-container {
-  background: rgba(255,255,255,0.25);
-  backdrop-filter: blur(14px);
-  border-radius:20px;
-  box-shadow:0 25px 50px rgba(0,0,0,0.1);
-  padding:40px;
-  max-width:1000px;
-  width:100%;
-  color:#1b1b2f;
-}
-
-.glass-container h1 {
-  text-align:center;
-  margin-bottom:25px;
-  font-size:2.2em;
-  color:#4654d8;
-  text-shadow:0 3px 8px rgba(0,0,0,0.1);
-}
-
-.top-bar {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:30px;
-  flex-wrap:wrap;
-  gap:10px;
-}
-
-.logout-btn {
-  padding:10px 18px;
-  background: #5b7cfa;
-  border:none;
-  border-radius:8px;
-  font-weight:600;
-  color:#fff;
-  cursor:pointer;
-  transition:0.3s;
-}
-.logout-btn:hover {
-  background:#4654d8;
-  transform:translateY(-2px);
-}
-
-.search-form {
-  display:flex;
-  gap:10px;
-  background:rgba(255,255,255,0.3);
-  padding:8px 14px;
-  border-radius:12px;
-  backdrop-filter:blur(6px);
-  flex-wrap:wrap;
-}
-.search-form input {
-  border:none;
-  border-radius:6px;
-  padding:10px;
-  font-size:14px;
-  flex:1;
-}
-.search-form input:focus {
-  outline:none;
-  box-shadow:0 0 8px rgba(91,124,250,0.5);
-}
-.search-form button {
-  padding:10px 18px;
-  font-size:14px;
-  font-weight:600;
-  border:none;
-  border-radius:6px;
-  background:linear-gradient(to right,#5b7cfa,#4654d8);
-  color:#fff;
-  cursor:pointer;
-  transition:0.3s;
-}
-.search-form button:hover {
-  background:linear-gradient(to right,#4654d8,#3c45c0);
-  transform:translateY(-2px);
-}
-
-table {
-  width:100%;
-  border-collapse:collapse;
-  border-radius:16px;
-  overflow:hidden;
-  box-shadow:0 8px 25px rgba(0,0,0,0.15);
-  background:rgba(255,255,255,0.3);
-  backdrop-filter:blur(8px);
-  margin-bottom:20px;
-}
-th, td {
-  padding:16px;
-  text-align:center;
-  font-size:15px;
-}
-th {
-  background:#5b7cfa;
-  color:#fff;
-  text-transform:uppercase;
-  font-size:14px;
-  letter-spacing:0.06em;
-}
-td {
-  color:#1b1b2f;
-  border-bottom:1px solid rgba(255,255,255,0.3);
-}
-tr:last-child td { border-bottom:none; }
-tr:hover {
-  background: rgba(255,255,255,0.4);
-  transition:0.3s ease;
-}
-
-a {
-  padding:6px 12px;
-  border-radius:6px;
-  font-size:13px;
-  font-weight:600;
-  text-decoration:none;
-  margin:0 4px;
-  display:inline-block;
-  transition:0.3s ease;
-}
-a[href*="update"] {
-  background:#3ecf8e;
-  color:#fff;
-}
-a[href*="update"]:hover {
-  background:#33b37a;
-  transform:translateY(-2px);
-}
-a[href*="delete"] {
-  background:#f55d5d;
-  color:#fff;
-}
-a[href*="delete"]:hover {
-  background:#e04848;
-  transform:translateY(-2px);
-}
-
-.btn-create {
-  width:50%;
-  padding:15px;
-  border:none;
-  background:#5b7cfa;
-  color:#fff;
-  font-size:1.25em;
-  font-weight:500;
-  border-radius:5px;
-  cursor:pointer;
-  transition:0.3s;
-}
-.btn-create:hover {
-  background:#4654d8;
-  transform:translateY(-2px);
-}
-.button-container {
-  text-align:center;
-  margin-top:20px;
-}
-
-.user-status {
-  background:#eef2ff;
-  border:1px solid #ccd4ff;
-  padding:10px 15px;
-  border-radius:8px;
-  display:inline-block;
-  color:#4654d8;
-  font-size:14px;
-  margin-bottom:20px;
-}
-.user-status strong { font-weight:600; }
-.user-status .role { font-size:13px; color:#555; }
-
-.pagination-container {
-  display:flex;
-  justify-content:center;
-  margin:25px 0;
-}
-.pagination-container ul {
-  display:flex;
-  list-style:none;
-  gap:8px;
-  padding:0;
-  margin:0;
-}
-.pagination-container li a, .pagination-container li span {
-  display:block;
-  padding:10px 16px;
-  border:1px solid rgba(255,255,255,0.3);
-  border-radius:8px;
-  background:rgba(255,255,255,0.3);
-  backdrop-filter:blur(6px);
-  color:#1b1b2f;
-  font-size:14px;
-  text-decoration:none;
-  transition:all 0.3s ease;
-}
-.pagination-container li a:hover {
-  background:#5b7cfa;
-  color:#fff;
-  transform:translateY(-2px);
-}
-.pagination-container li.active span {
-  background:#4654d8;
-  color:#fff;
-  border-color:#4654d8;
-  font-weight:bold;
-}
-
-@media (max-width:768px){
-  .top-bar { flex-direction:column; gap:15px; align-items:stretch; }
-  .search-form { width:100%; justify-content:space-between; }
-  .search-form input { flex:1; min-width:0; }
-  th, td { padding:8px; font-size:13px; }
-  .btn-create { width:100%; font-size:1em; }
-}
-
-
+    .pagination {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+    .pagination a {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background-color: #ec4899;
+      color: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      text-decoration: none;
+      font-weight: 500;
+      transition: background-color 0.2s ease-in-out;
+    }
+    .pagination a:hover {
+      background-color: #db2777;
+    }
+    .pagination strong {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background-color: #be185d;
+      color: white;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
   </style>
 </head>
-<body>
-  <section>
-    <div class="glass-container">
-      <h1><?= ($logged_in_user['role']==='admin') ? 'Admin Dashboard':'User Dashboard'; ?></h1>
 
-      <div class="top-bar">
-        <a href="<?=site_url('auth/logout');?>"><button class="logout-btn">Logout</button></a>
-        <form action="<?=site_url('users');?>" method="get" class="search-form">
-          <?php $q = $_GET['q'] ?? ''; ?>
-          <input type="text" name="q" placeholder="Search" value="<?=html_escape($q);?>">
-          <button type="submit">Search</button>
+<body class="bg-gradient-to-br from-pink-200 via-pink-100 to-pink-300 min-h-screen font-sans text-gray-800">
+
+  <!-- Navbar -->
+  <nav class="bg-gradient-to-r from-pink-600 to-pink-400 shadow-md">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="#" class="text-white font-semibold text-xl tracking-wide">📊 User Management</a>
+      <!-- Logout button in navbar -->
+      <a href="<?=site_url('reg/logout');?>" 
+         class="bg-white text-pink-600 font-semibold px-4 py-2 rounded-lg shadow hover:bg-gray-100 transition">
+         Logout
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="max-w-6xl mx-auto mt-10 px-4">
+
+    <div class="bg-white bg-opacity-90 backdrop-blur-sm shadow-xl rounded-2xl p-8">
+
+      <!-- Logged In User Display -->
+      <?php if(!empty($logged_in_user)): ?>
+        <div class="mb-8 bg-pink-100 text-pink-800 px-6 py-5 rounded-xl shadow-lg text-center">
+          <h2 class="text-3xl font-bold mb-1">
+            Welcome, <span class="font-semibold"><?= html_escape($logged_in_user['username']); ?></span>!
+          </h2>
+          <p class="text-xl">Role: <span class="font-semibold"><?= html_escape($logged_in_user['role']); ?></span></p>
+        </div>
+      <?php else: ?>
+        <div class="mb-6 bg-red-100 text-red-700 px-4 py-3 rounded-lg shadow text-center">
+          Logged in user not found
+        </div>
+      <?php endif; ?>
+
+      <!-- Header -->
+      <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-semibold text-pink-600">👥 User Directory</h1>
+
+        <!-- Search Bar -->
+        <form method="get" action="<?=site_url('users');?>" class="flex">
+          <input 
+            type="text" 
+            name="q" 
+            value="<?=html_escape($_GET['q'] ?? '')?>" 
+            placeholder="Search user..." 
+            class="w-full border border-pink-200 bg-pink-50 rounded-l-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-300 text-gray-800">
+          <button type="submit" class="bg-pink-500 hover:bg-pink-600 text-white px-4 rounded-r-xl transition">
+            🔍
+          </button>
         </form>
       </div>
+      
+      <!-- Table -->
+      <div class="overflow-x-auto rounded-xl border border-pink-200">
+        <table class="w-full text-center border-collapse">
+          <thead>
+            <tr class="bg-gradient-to-r from-pink-600 to-pink-400 text-white">
+              <th class="py-3 px-4">ID</th>
+              <th class="py-3 px-4">Username</th>
+              <th class="py-3 px-4">Email</th>
+              <th class="py-3 px-4">Role</th>
+              <th class="py-3 px-4">Action</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <?php foreach(html_escape($users) as $user): ?>
+              <tr class="hover:bg-pink-50 transition duration-200">
+                <td class="py-3 px-4"><?=($user['id']);?></td>
+                <td class="py-3 px-4"><?=($user['username']);?></td>
+                <td class="py-3 px-4">
+                  <span class="bg-pink-100 text-pink-700 text-sm font-medium px-3 py-1 rounded-full">
+                    <?=($user['email']);?>
+                  </span>
+                </td>
+                <td class="py-3 px-4 font-medium"><?=($user['role']);?></td>
+                <td class="py-3 px-4 space-x-3">
+                  <?php if($logged_in_user['role'] === 'admin' || $logged_in_user['id'] == $user['id']): ?>
+                    <a href="<?=site_url('users/update/'.$user['id']);?>"
+                       class="px-4 py-2 text-sm font-medium rounded-lg bg-pink-400 text-white hover:bg-pink-500 transition duration-200 shadow">
+                      ✏️ Update
+                    </a>
+                  <?php endif; ?>
 
-      <div class="table-responsive">
-      <table>
-        <tr>
-          <th>ID</th>
-          <th>Firstname</th>
-          <th>Lastname</th>
-          <th>Email</th>
-          <?php if ($logged_in_user['role']==='admin'): ?>
-            <th>Role</th>
-          <?php endif; ?>
-          <th>Action</th>
-        </tr>
-        <?php foreach($users as $user): ?>
-        <tr>
-          <td><?=html_escape($user['id']);?></td>
-          <td><?=html_escape($user['firstname']);?></td>
-          <td><?=html_escape($user['lastname']);?></td>
-          <td><?=html_escape($user['email']);?></td>
-          <?php if($logged_in_user['role']==='admin'): ?>
-            <td><?=html_escape($user['role']);?></td>
-          <?php endif; ?>
-          <td>
-            <a href="<?=site_url('/users/update/'.$user['id']);?>">Update</a>
-            <a href="<?=site_url('/users/delete/'.$user['id']);?>">Delete</a>
-          </td>
-        </tr>
-        <?php endforeach; ?>
-      </table>
+                  <?php if($logged_in_user['role'] === 'admin'): ?>
+                    <a href="<?=site_url('users/delete/'.$user['id']);?>"
+                       onclick="return confirm('Are you sure you want to delete this record?');"
+                       class="px-4 py-2 text-sm font-medium rounded-lg bg-pink-600 text-white hover:bg-pink-700 transition duration-200 shadow">
+                      🗑️ Delete
+                    </a>
+                  <?php endif; ?>
+                </td>
+              </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
       </div>
 
-      <div class="pagination-container">
-        <?= $page; ?>
+      <!-- Pagination -->
+      <div class="mt-6 flex justify-center">
+        <div class="pagination">
+          <?= $page; ?>
+        </div>
       </div>
 
-      <?php if($logged_in_user['role']==='admin'): ?>
-      <div class="button-container">
-        <a href="<?=site_url('users/create');?>" class="btn-create">+ Create New User</a>
+      <!-- Create New User -->
+      <div class="mt-6 text-center">
+        <a href="<?=site_url('users/create')?>"
+           class="inline-block bg-pink-500 hover:bg-pink-600 text-white font-medium px-6 py-3 rounded-lg shadow-md transition duration-200">
+          ➕ Create New User
+        </a>
       </div>
-      <?php endif; ?>
     </div>
-  </section>
+  </div>
+
 </body>
 </html>

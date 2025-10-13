@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
 
-  <!-- Font Awesome for eye icon -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
@@ -16,165 +15,145 @@
       font-family: "Poppins", sans-serif;
     }
 
-    body {
+    body, html {
+      width: 100%;
+      height: 100%;
+    }
+
+    section {
       display: flex;
       justify-content: center;
       align-items: center;
+      width: 100%;
       height: 100vh;
-      background: linear-gradient(135deg, #f0f7f5, #ffffff);
+      background: linear-gradient(to bottom right, #fbcfe8, #fce7f3, #f9a8d4);
     }
 
     .login {
-      background: #fff;
-      padding: 35px 30px;
-      border-radius: 15px;
-      width: 95%;
-      max-width: 380px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .login:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+      background: white;
+      padding: 50px 40px;
+      width: 500px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      border: 1px solid #f9a8d4;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
     }
 
     .login h2 {
       text-align: center;
-      margin-bottom: 25px;
-      color: #2C786C;
-      font-size: 1.8em;
-      letter-spacing: 0.5px;
+      font-size: 2em;
+      font-weight: 600;
+      color: #db2777;
+      margin-bottom: 10px;
     }
 
-    .login .inputBox {
+    .inputBox {
       position: relative;
-      margin-bottom: 18px;
+      margin-bottom: 15px;
     }
 
-    .login .inputBox input {
+    .inputBox input {
       width: 100%;
-      padding: 12px 42px 12px 12px;
-      font-size: 1em;
+      padding: 15px 45px 15px 20px;
+      font-size: 1.1em;
+      color: #a21caf;
       border-radius: 8px;
-      border: 1px solid #cdd9d6;
-      background: #f8fbfa;
-      transition: all 0.3s ease;
+      background: #fdf2f8;
+      border: 1px solid #fbcfe8;
+      outline: none;
     }
 
-    .login .inputBox input:focus {
-      border-color: #2C786C;
-      outline: none;
-      box-shadow: 0 0 6px rgba(44, 120, 108, 0.3);
-      background: #fff;
+    .inputBox ::placeholder {
+      color: #d63384;
     }
 
     .toggle-password {
       position: absolute;
-      right: 12px;
+      right: 15px;
       top: 50%;
       transform: translateY(-50%);
       cursor: pointer;
-      color: #8b9d9a;
       font-size: 1.1em;
-      transition: color 0.3s ease;
+      color: #d63384;
     }
 
-    .toggle-password:hover {
-      color: #2C786C;
-    }
-
-    .login button {
+    button {
       width: 100%;
-      padding: 12px;
+      padding: 15px;
       border: none;
-      background: #2C786C;
+      background: #ec4899;
       color: #fff;
-      font-size: 1em;
-      font-weight: 600;
-      border-radius: 8px;
+      font-size: 1.15em;
+      font-weight: 500;
+      border-radius: 10px;
       cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s ease;
+      transition: 0.3s;
     }
 
-    .login button:hover {
-      background: #3E9C8C;
-      transform: translateY(-2px);
-    }
-
-    .error-box {
-      background: rgba(255, 0, 0, 0.08);
-      color: #c0392b;
-      padding: 10px;
-      border: 1px solid #c0392b;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      text-align: center;
-      font-size: 0.9em;
+    button:hover {
+      background: #db2777;
     }
 
     .group {
-      margin-top: 18px;
       text-align: center;
     }
 
-    .group p {
-      font-size: 0.9em;
-      color: #555;
-    }
-
     .group a {
-      color: #2C786C;
-      text-decoration: none;
+      font-size: 1em;
+      color: #d63384;
       font-weight: 500;
+      text-decoration: none;
     }
 
     .group a:hover {
       text-decoration: underline;
     }
 
-    @media (max-width: 400px) {
-      .login {
-        padding: 25px 20px;
-      }
-
-      .login h2 {
-        font-size: 1.5em;
-      }
+    .error-box {
+      background: rgba(255,0,0,0.08);
+      color: #db2777;
+      padding: 10px;
+      border: 1px solid #db2777;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 0.95em;
+      margin-bottom: 10px;
     }
   </style>
 </head>
 <body>
-  <div class="login">
-    <h2>Welcome Back</h2>
+  <section>
+    <div class="login">
+      <h2>Login</h2>
 
-    <?php if (!empty($error)): ?>
-      <div class="error-box">
-        <?= $error ?>
+      <?php if (!empty($error)): ?>
+        <div class="error-box">
+          <?= $error ?>
+        </div>
+      <?php endif; ?>
+
+      <form method="post" action="<?= site_url('reg/login') ?>">
+        <div class="inputBox">
+          <input type="text" placeholder="Username" name="username" required>
+        </div>
+
+        <div class="inputBox">
+          <input type="password" placeholder="Password" name="password" id="password" required>
+          <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
+        </div>
+
+        <button type="submit" id="btn">Login</button>
+      </form>
+
+      <div class="group">
+        <p style="font-size: 0.9em;">
+          Don't have an account? <a href="<?= site_url('reg/register'); ?>">Register here</a>
+        </p>
       </div>
-    <?php endif; ?>
-
-    <form method="post" action="<?= site_url('auth/login') ?>">
-      <div class="inputBox">
-        <input type="text" placeholder="First Name" name="firstname" required>
-      </div>
-
-      <div class="inputBox">
-        <input type="text" placeholder="Last Name" name="lastname" required>
-      </div>
-
-      <div class="inputBox">
-        <input type="password" placeholder="Password" name="password" id="password" required>
-        <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
-      </div>
-
-      <button type="submit">Login</button>
-    </form>
-
-    <div class="group">
-      <p>Don’t have an account? <a href="<?= site_url('auth/register'); ?>">Register here</a></p>
     </div>
-  </div>
+  </section>
 
   <script>
     const togglePassword = document.querySelector('#togglePassword');
@@ -183,6 +162,7 @@
     togglePassword.addEventListener('click', function () {
       const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
       password.setAttribute('type', type);
+
       this.classList.toggle('fa-eye');
       this.classList.toggle('fa-eye-slash');
     });

@@ -43,13 +43,12 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 |
 */
 
-// Registration is the default page
 $router->match('/', 'UserController::register', ['GET','POST']);
 
 // Auth routes
-$router->match('/auth/register', 'UserController::register', ['GET','POST']);
-$router->match('/auth/login', 'UserController::login', ['GET','POST']);
-$router->get('/auth/logout', 'UserController::logout');
+$router->match('/reg/register', 'UserController::register', ['GET','POST']);
+$router->match('/reg/login', 'UserController::login', ['GET','POST']);
+$router->get('/reg/logout', 'UserController::logout');
 
 // Homepage (after login)
 $router->get('/users', 'UserController::index');
