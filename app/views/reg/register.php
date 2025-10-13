@@ -1,10 +1,11 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
     * {
       margin: 0;
@@ -16,26 +17,29 @@
     body, section {
       width: 100%;
       height: 100vh;
-      background: linear-gradient(to bottom right, #fbcfe8, #fce7f3, #f9a8d4);
+      background: linear-gradient(135deg, #0f172a, #1e293b, #0f172a);
       display: flex;
       justify-content: center;
       align-items: center;
+      color: #f1f5f9;
     }
 
     .login {
-      background: white;
+      background: rgba(30, 41, 59, 0.85);
       padding: 50px 40px;
-      width: 500px;
+      width: 450px;
       border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-      border: 1px solid #f9a8d4;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      backdrop-filter: blur(15px);
+      animation: fadeIn 0.8s ease;
     }
 
     .login h2 {
       text-align: center;
       font-size: 2em;
       font-weight: 600;
-      color: #db2777;
+      color: #3b82f6;
       margin-bottom: 25px;
     }
 
@@ -44,15 +48,21 @@
       padding: 14px 20px;
       margin-bottom: 18px;
       font-size: 1.05em;
-      border-radius: 8px;
-      border: 1px solid #fbcfe8;
-      background: #fdf2f8;
-      color: #a21caf;
+      border-radius: 10px;
+      border: 1px solid #334155;
+      background: rgba(15, 23, 42, 0.9);
+      color: #e2e8f0;
       outline: none;
+      transition: all 0.3s ease;
     }
 
     .login input::placeholder {
-      color: #d63384;
+      color: #94a3b8;
+    }
+
+    .login input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
     }
 
     .password-box {
@@ -65,24 +75,31 @@
       top: 50%;
       transform: translateY(-50%);
       cursor: pointer;
-      color: #d63384;
+      color: #3b82f6;
+      transition: color 0.3s ease;
+    }
+
+    .password-box i:hover {
+      color: #60a5fa;
     }
 
     #btn {
       width: 100%;
       padding: 15px;
-      font-size: 1.2em;
+      font-size: 1.1em;
       font-weight: 500;
       border: none;
       border-radius: 10px;
-      background: #ec4899;
+      background: linear-gradient(90deg, #2563eb, #3b82f6);
       color: white;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
     }
 
     #btn:hover {
-      background: #db2777;
+      background: linear-gradient(90deg, #1d4ed8, #2563eb);
+      box-shadow: 0 0 25px rgba(37, 99, 235, 0.6);
     }
 
     .group {
@@ -91,13 +108,20 @@
     }
 
     .group a {
-      color: #d63384;
+      color: #60a5fa;
       text-decoration: none;
       font-weight: 500;
+      transition: color 0.3s;
     }
 
     .group a:hover {
+      color: #93c5fd;
       text-decoration: underline;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -105,6 +129,7 @@
   <section>
     <div class="login">
       <h2>Register</h2>
+
       <form method="POST" action="<?= site_url('reg/register'); ?>" class="inputBox">
 
         <input type="text" name="username" placeholder="Username" required>
@@ -120,7 +145,7 @@
           <i class="fa-solid fa-eye" id="toggleConfirmPassword"></i>
         </div>
 
-        <!-- Hidden role input to force user role -->
+        <!-- Hidden role input -->
         <input type="hidden" name="role" value="user">
 
         <button type="submit" id="btn">Register</button>

@@ -20,32 +20,37 @@
       height: 100%;
     }
 
+    /* Dark background with gradient */
     section {
       display: flex;
       justify-content: center;
       align-items: center;
       width: 100%;
       height: 100vh;
-      background: linear-gradient(to bottom right, #fbcfe8, #fce7f3, #f9a8d4);
+      background: linear-gradient(135deg, #0f172a, #1e293b, #0f172a);
+      color: #f1f5f9;
     }
 
+    /* Glassmorphism login container */
     .login {
-      background: white;
+      background: rgba(30, 41, 59, 0.85);
       padding: 50px 40px;
-      width: 500px;
+      width: 420px;
       border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-      border: 1px solid #f9a8d4;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      backdrop-filter: blur(15px);
       display: flex;
       flex-direction: column;
       gap: 25px;
+      animation: fadeIn 0.8s ease;
     }
 
     .login h2 {
       text-align: center;
       font-size: 2em;
       font-weight: 600;
-      color: #db2777;
+      color: #3b82f6;
       margin-bottom: 10px;
     }
 
@@ -57,16 +62,22 @@
     .inputBox input {
       width: 100%;
       padding: 15px 45px 15px 20px;
-      font-size: 1.1em;
-      color: #a21caf;
-      border-radius: 8px;
-      background: #fdf2f8;
-      border: 1px solid #fbcfe8;
+      font-size: 1.05em;
+      color: #e2e8f0;
+      border-radius: 10px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid #334155;
       outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .inputBox input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
     }
 
     .inputBox ::placeholder {
-      color: #d63384;
+      color: #94a3b8;
     }
 
     .toggle-password {
@@ -76,24 +87,31 @@
       transform: translateY(-50%);
       cursor: pointer;
       font-size: 1.1em;
-      color: #d63384;
+      color: #3b82f6;
+      transition: color 0.3s ease;
+    }
+
+    .toggle-password:hover {
+      color: #60a5fa;
     }
 
     button {
       width: 100%;
       padding: 15px;
       border: none;
-      background: #ec4899;
+      background: linear-gradient(90deg, #2563eb, #3b82f6);
       color: #fff;
-      font-size: 1.15em;
+      font-size: 1.1em;
       font-weight: 500;
       border-radius: 10px;
       cursor: pointer;
-      transition: 0.3s;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
     }
 
     button:hover {
-      background: #db2777;
+      background: linear-gradient(90deg, #1d4ed8, #2563eb);
+      box-shadow: 0 0 25px rgba(37, 99, 235, 0.6);
     }
 
     .group {
@@ -101,25 +119,32 @@
     }
 
     .group a {
-      font-size: 1em;
-      color: #d63384;
+      font-size: 0.95em;
+      color: #60a5fa;
       font-weight: 500;
       text-decoration: none;
+      transition: 0.3s;
     }
 
     .group a:hover {
       text-decoration: underline;
+      color: #93c5fd;
     }
 
     .error-box {
-      background: rgba(255,0,0,0.08);
-      color: #db2777;
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
       padding: 10px;
-      border: 1px solid #db2777;
+      border: 1px solid rgba(239, 68, 68, 0.4);
       border-radius: 8px;
       text-align: center;
       font-size: 0.95em;
       margin-bottom: 10px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -162,7 +187,6 @@
     togglePassword.addEventListener('click', function () {
       const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
       password.setAttribute('type', type);
-
       this.classList.toggle('fa-eye');
       this.classList.toggle('fa-eye-slash');
     });
